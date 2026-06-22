@@ -1,0 +1,13 @@
+1. منع VLAN 10 من الـ Ping (ICMP) وتصفح الموقع (HTTP/HTTPS):
+
+Router_Alx(config)# access-list 101 deny icmp 192.168.10.0 0.0.0.255 host 192.168.100.10
+Router_Alx(config)# access-list 101 deny tcp 192.168.10.0 0.0.0.255 host 192.168.100.10 eq 80
+Router_Alx(config)# access-list 101 deny tcp 192.168.10.0 0.0.0.255 host 192.168.100.10 eq 443
+access-list 101 permit ip any any
+
+
+
+Router_Alx(config)# interface FastEthernet 1/0
+Router_Alx(config-if)# ip access-group 101 out
+Router_Alx(config-if)# end
+Router_Alx# write
